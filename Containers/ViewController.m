@@ -16,6 +16,8 @@
 
 @property (weak, nonatomic) ContainerViewController *containerViewController;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *containerHeight;
+
 @end
 
 @implementation ViewController
@@ -43,10 +45,17 @@
 
 - (IBAction)showTest1ButtonPressed:(id)sender {
     
+    
+    self.containerHeight.constant = 100;
+    [self.view layoutIfNeeded];
+    
     [self.containerViewController showParticularScreen:SegueIdentifierFirst];
 }
 
 - (IBAction)showTest2ButtonPressed:(id)sender {
+    
+    self.containerHeight.constant = 300;
+    [self.view layoutIfNeeded];
     
     [self.containerViewController showParticularScreen:SegueIdentifierSecond];
 }
