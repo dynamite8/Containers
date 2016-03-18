@@ -7,21 +7,48 @@
 //
 
 #import "ViewController.h"
+#import "ContainerViewController.h"
+
+#define SegueIdentifierFirst @"kSegueShow1"
+#define SegueIdentifierSecond @"kSegueShow2"
 
 @interface ViewController ()
+
+@property (weak, nonatomic) ContainerViewController *containerViewController;
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    return YES;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    if ([segue.identifier isEqualToString:@"embedContainer"]) {
+        self.containerViewController = segue.destinationViewController;
+    }
+}
+
+- (IBAction)swapButtonPressed:(id)sender {
+    
+    [self.containerViewController swapViewControllers];
+}
+
+- (IBAction)showTest1ButtonPressed:(id)sender {
+    
+    [self.containerViewController showParticularScreen:SegueIdentifierFirst];
+}
+
+- (IBAction)showTest2ButtonPressed:(id)sender {
+    
+    [self.containerViewController showParticularScreen:SegueIdentifierSecond];
 }
 
 @end
